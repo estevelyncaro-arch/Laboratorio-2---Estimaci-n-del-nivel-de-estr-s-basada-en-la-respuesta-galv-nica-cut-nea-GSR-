@@ -72,6 +72,251 @@ En la siguiente parte del código se aborda principalmente el procesamiento de l
 Se aplica un filtro adaptativo exponencial que separa el componente tónico (SCL), correspondiente a la parte lenta y basal de la señal. A partir de ello se obtiene también el componente fásico (SCR), que refleja las variaciones rápidas asociadas a respuestas simpáticas. El algoritmo ajusta el número real de muestras recibidas y calcula la frecuencia efectiva de adquisición, compensando posibles variaciones de latencia en la transmisión inalámbrica.
 Posteriormente, las señales se normalizan restando el voltaje medio inicial, de modo que las variaciones comiencen desde un nivel de referencia centrado en cero. Con esta base, se segmenta el estado autonómico en tres categorías: relajado, normal o estresado, según el nivel medio de conductancia. Además, se aplica un filtro de media móvil para reducir el ruido y se implementa un detector de eventos fisiológicos. Este detector identifica incrementos rápidos en la señal (flancos ascendentes) que superan un umbral definido y utiliza un período refractario de aproximadamente un segundo para evitar contabilizar varias veces el mismo evento.
 
+```matlab
+scl_max = max(scl);
+scl_min = min(scl);
+scl_promedio = mean(scl);
+
+scr_max = max(scr);
+scr_min = min(scr);
+scr_promedio = mean(scr);
+amplitud_scr = max(scr_suave) - min(scr_suave);
+
+delta_scl = scl(end) - scl_baseline;
+delta_gsr = gsr(end) - gsr_baseline;
+max_delta_scl = max(scl_norm);
+max_delta_gsr = max(gsr_norm);
+
+std_gsr = std(gsr);
+std_scl = std(scl);
+std_scr = std(scr);
+
+rms_gsr = rms(gsr);
+rms_scl = rms(scl);
+rms_scr = rms(scr);
+
+coef_scl = polyfit(t,scl,1);
+pendiente_scl = coef_scl(1);
+variabilidad_scl = std(scl_norm);
+delta_scl_promedio = mean(scl_norm);
+
+puntaje_scl = min(max((max_delta_scl / ref_scl) * 100, 0), 100);
+puntaje_scr = min(max((amplitud_scr / ref_scr) * 100, 0), 100);
+puntaje_eventos = min(max((numero_eventos_scr / ref_eventos) * 100, 0), 100);
+puntaje_pendiente = min(max((abs(pendiente_scl) / ref_pendiente) * 100, 0), 100);
+
+indice_estres = 0.50 * puntaje_scl + 0.25 * puntaje_scr + 0.15 * puntaje_eventos + 0.10 * puntaje_pendiente;
+indice_estres = min(max(indice_estres,0),100);
+indice_relajacion = 100 - indice_estres;
+
+fprintf('\n=====================================\n')
+fprintf('       EVALUACIÓN DEL ESTADO\n')
+fprintf('=====================================\n')
+fprintf('Condición:               %s\n', condicion)
+fprintf('GSR Promedio:            %.4f V\n', gsr_promedio)
+fprintf('Estado Diagnosticado:   %s\n', nivel_estres)
+fprintf('=====================================\n\n')
+
+if nivel_estres == "ESTRESADO"
+    disp(" ⚠️ ALERTA: LA PERSONA ESTÁ ESTRESADA (> 1.7 V) ⚠️")
+    
+    % Generar tono de alarma (Frecuencia: 1000 Hz por 1.5 segundos)
+    fs_audio = 8000;
+    t_audio = 0:1/fs_audio:1.5;
+    frecuencia_alarma = 1000;
+    tono = sin(2*pi*frecuencia_alarma*t_audio);
+    
+    sound(tono, fs_audio); % Reproducir tono
+elseif nivel_estres == "NORMAL"
+    disp(" Nivel de estrés dentro del rango normal (1.4 V - 1.7 V).")
+else
+    disp(" Persona completamente relajada (< 1.4 V).")
+end
+
+fprintf('\n=====================================\n')
+fprintf('           MÉTRICAS GSR\n')
+fprintf('=====================================\n')
+fprintf('\n--- SEÑAL GSR ---\n')
+fprintf('GSR máximo:              %.4f V\n',gsr_max)
+fprintf('GSR mínimo:              %.4f V\n',gsr_min)
+fprintf('GSR promedio:            %.4f V\n',gsr_promedio)
+fprintf('GSR desviación estándar %.4f V\n',std_gsr)
+fprintf('GSR RMS:                 %.4f V\n',rms_gsr)
+fprintf('\n--- SCL ---\n')
+fprintf('SCL basal:               %.4f V\n',scl_baseline)
+fprintf('SCL máximo:              %.4f V\n',scl_max)
+fprintf('SCL mínimo:              %.4f V\n',scl_min)
+fprintf('SCL promedio:            %.4f V\n',scl_promedio)
+fprintf('SCL desviación estándar %.4f V\n',std_scl)
+fprintf('SCL RMS:                 %.4f V\n',rms_scl)
+fprintf('Pendiente SCL:           %.6f V/s\n',pendiente_scl)
+fprintf('Variabilidad SCL:        %.4f V\n',variabilidad_scl)
+fprintf('Cambio SCL promedio:     %.4f V\n',delta_scl_promedio)
+fprintf('\n--- CAMBIO SCL ---\n')
+fprintf('Cambio final SCL:        %.4f V\n',delta_scl)
+fprintf('Máximo cambio SCL:       %.4f V\n',max_delta_scl)
+fprintf('\n--- SCR ---\n')
+fprintf('SCR máximo:              %.4f V\n',scr_max)
+fprintf('SCR mínimo:              %.4f V\n',scr_min)
+fprintf('SCR promedio:            %.4f V\n',scr_promedio)
+fprintf('SCR amplitud:            %.4f V\n',amplitud_scr)
+fprintf('SCR desviación estándar %.4f V\n',std_scr)
+fprintf('SCR RMS:                 %.4f V\n',rms_scr)
+fprintf('Eventos SCR:             %d\n',numero_eventos_scr)
+fprintf('\n--- CAMBIO GSR ---\n')
+fprintf('Cambio final GSR:        %.4f V\n',delta_gsr)
+fprintf('Máximo cambio GSR:       %.4f V\n',max_delta_gsr)
+fprintf('\n--- PUNTAJES ---\n')
+fprintf('Puntaje SCL:             %.2f / 100\n',puntaje_scl)
+fprintf('Puntaje SCR:             %.2f / 100\n',puntaje_scr)
+fprintf('Puntaje eventos:         %.2f / 100\n',puntaje_eventos)
+fprintf('Puntaje pendiente:       %.2f / 100\n',puntaje_pendiente)
+fprintf('\n--- ÍNDICES FINALES ---\n')
+fprintf('NIVEL:                   %s\n',nivel_estres)
+fprintf('=====================================\n')
+
+
+figure('Name','Señal GSR','NumberTitle','off')
+subplot(3,1,1)
+plot(t,gsr,'LineWidth',1.2)
+grid on
+xlabel('Tiempo [s]')
+ylabel('Voltaje [V]')
+title(['Señal GSR adquirida - ' condicion])
+xlim([0 duracion])
+
+subplot(3,1,2)
+plot(t,scl,'LineWidth',1.3)
+hold on
+yline(scl_baseline,'--')
+grid on
+xlabel('Tiempo [s]')
+ylabel('Voltaje [V]')
+title('Componente SCL - Nivel basal')
+legend('SCL','Baseline')
+xlim([0 duracion])
+
+subplot(3,1,3)
+plot(t,scr,'LineWidth',0.8)
+hold on
+plot(t,scr_suave,'LineWidth',1.5)
+yline(umbral_scr,'--')
+grid on
+xlabel('Tiempo [s]')
+ylabel('Voltaje [V]')
+title('Componente SCR - Respuesta rápida')
+legend('SCR original','SCR suavizado','Umbral')
+xlim([0 duracion])
+
+figure('Name','Señales Normalizadas','NumberTitle','off')
+subplot(2,1,1)
+plot(t,gsr_norm,'LineWidth',1.3)
+hold on
+yline(0,'--')
+grid on
+xlabel('Tiempo [s]')
+ylabel('\Delta Voltaje [V]')
+title(['GSR respecto al nivel basal - ' condicion])
+xlim([0 duracion])
+
+subplot(2,1,2)
+plot(t,scl_norm,'LineWidth',1.5)
+hold on
+yline(0,'--')
+grid on
+xlabel('Tiempo [s]')
+ylabel('\Delta Voltaje [V]')
+title(['SCL respecto al nivel basal - ' condicion])
+xlim([0 duracion])
+
+figure('Name','Detección de respuestas SCR','NumberTitle','off')
+plot(t,scr_suave,'LineWidth',1.3)
+hold on
+yline(umbral_scr,'--')
+if ~isempty(eventos_scr)
+    plot(t(eventos_scr), scr_suave(eventos_scr), 'o', 'MarkerSize',7, 'LineWidth',1.5)
+    legend('SCR suavizado','Umbral','Eventos SCR')
+else
+    legend('SCR suavizado','Umbral')
+end
+grid on
+xlabel('Tiempo [s]')
+ylabel('SCR [V]')
+title(['Respuestas SCR detectadas - ' condicion])
+xlim([0 duracion])
+
+figure('Name','Estado de Estrés GSR','NumberTitle','off')
+axis off
+text(0.5,0.70,...
+    sprintf('GSR PROMEDIO\n\n%.2f V', gsr_promedio),...
+    'HorizontalAlignment','center','FontSize',22,'FontWeight','bold')
+
+if nivel_estres == "ESTRESADO"
+    color_texto = 'r';
+elseif nivel_estres == "NORMAL"
+    color_texto = [0.9 0.5 0];
+else
+    color_texto = 'g';
+end
+
+text(0.5,0.30,...
+    nivel_estres,...
+    'HorizontalAlignment','center','FontSize',30,'FontWeight','bold','Color',color_texto)
+
+figure('Name','Componentes del Índice de Activación','NumberTitle','off')
+puntajes = [puntaje_scl puntaje_scr puntaje_eventos puntaje_pendiente];
+bar(puntajes)
+grid on
+ylim([0 100])
+ylabel('Puntaje [0-100]')
+title('Componentes utilizados para calcular el índice')
+xticklabels({'SCL','SCR','Eventos','Pendiente SCL'})
+
+figure('Name','Relajación y Activación','NumberTitle','off')
+valores = [indice_relajacion indice_estres];
+bar(valores)
+grid on
+ylim([0 100])
+ylabel('Índice [0-100]')
+title('Índice de Relajación vs Índice de Activación')
+xticklabels({'Relajación','Activación'})
+
+if condicion == "Relajacion"
+    nombre_mat = "GSR_Relajacion.mat";
+    nombre_csv = "GSR_Relajacion.csv";
+else
+    nombre_mat = "GSR_Hiperventilacion.mat";
+    nombre_csv = "GSR_Hiperventilacion.csv";
+end
+
+save(nombre_mat,...
+     "t","gsr","scl","scr","scr_suave","gsr_norm","scl_norm",...
+     "fs","fs_real","gsr_baseline","scl_baseline","delta_gsr","delta_scl",...
+     "delta_scl_promedio","max_delta_gsr","max_delta_scl","numero_eventos_scr",...
+     "gsr_max","gsr_min","gsr_promedio","scl_max","scl_min","scl_promedio",...
+     "scr_max","scr_min","scr_promedio","amplitud_scr","std_gsr","std_scl",...
+     "std_scr","variabilidad_scl","rms_gsr","rms_scl","rms_scr","pendiente_scl",...
+     "puntaje_scl","puntaje_scr","puntaje_eventos","puntaje_pendiente",...
+     "indice_estres","indice_relajacion","nivel_estres","condicion")
+
+writematrix([t gsr scl scr], nombre_csv)
+
+disp(" ")
+disp("=====================================")
+disp("          DATOS GUARDADOS")
+disp("=====================================")
+fprintf("MAT: %s\n",nombre_mat)
+fprintf("CSV: %s\n",nombre_csv)
+fprintf("GSR Promedio: %.4f V\n",gsr_promedio)
+fprintf("Estado final: %s\n",nivel_estres)
+disp(" ")
+disp("Prueba finalizada correctamente.")
+```
+
+Esta ultima parte del código se centra en el análisis final de la señal galvánica y en la generación de resultados. En primer lugar, se ajusta un modelo lineal de primer orden sobre la curva tónica (SCL) para estimar la pendiente, la cual refleja la tendencia temporal de la sudoración. Asimismo, se calculan métricas estadísticas como la desviación estándar y el valor eficaz (RMS), útiles para cuantificar la energía de la señal.
+A partir de estos valores se normalizan cuatro parámetros clave en una escala porcentual y se integran en un índice global mediante un promedio ponderado: la variación máxima de la componente lenta, la amplitud de la rápida, la frecuencia de eventos electrodérmicos y la pendiente de la SCL. El complemento de este índice se interpreta como un indicador de relajación.
+Finalmente, el programa imprime en consola un resumen ejecutivo del ensayo y, en caso de que el estado se clasifique como “estresado”, emite una señal acústica de advertencia a través de la tarjeta de sonido. Además, genera diversas representaciones gráficas: desde la visualización de la señal cruda y sus componentes, hasta diagramas de barras que muestran el aporte porcentual de cada parámetro y la clasificación codificada por colores (verde, naranja o rojo).
+
 
 ## Parte C
 
