@@ -27,7 +27,35 @@ Para la captura de la señal galvánica se implementó el siguiente código, en 
 
 ## Parte C
 
+Inicialmente se realiza la captura de la señal mientras el paciente se encuentra en relajación, observando que en los gráficos obtenidos la señal se encuentra al rededor, o cerca al nivel basal, obteniendo un promedio de 0.03 Voltios (V).
 
+<img width="1600" height="747" alt="image" src="https://github.com/user-attachments/assets/619dc8f0-d076-4d8c-a83d-8a4fb33b92d8" />
+
+<img width="1600" height="695" alt="image" src="https://github.com/user-attachments/assets/cace1e0a-a6e3-4160-a257-a460efbbd017" />
+
+##
+
+Adicionalmente se toma la captura de la señal en relajación como se realizo anteriormente, sin embargo durante esta captura el paciente presenta un susto, lo que genera "Estrés", pasando de un estado de relajación en aproximadamente 0.03 V a un estado de estres elevando el voltaje a aproximadamente 3 V, como se puede evidenciar en los siguientes gráficos.
+
+<img width="1600" height="714" alt="image" src="https://github.com/user-attachments/assets/fa7c8d9b-4262-466e-b7d4-6ebf0d100938" />
+
+<img width="1600" height="749" alt="image" src="https://github.com/user-attachments/assets/f7afc8bc-c730-42cf-8dcc-b52504a8e00d" />
+
+##
+
+Finalmente obtenemos tres gráficos importantes que se explican a continuación.
+
+- En el primer gráfico correspondiente a la primer señal obtenida, observamos que el índice de relajación tiene un nivel alto siendo un valor al redero de 95, así mismo se observa que la activación es muy pequeña con un indice de 5 aporximadamente, confirmando que el paciente se encuentra en un estado de relajación.
+
+<img width="1600" height="742" alt="image" src="https://github.com/user-attachments/assets/18924cc6-0091-455c-b13b-61e30bc3fa8f" />
+
+- Para el seundo gráfico correspondiente al estímulo de estrés, se evidencia que el nivel de relajación disminuye significativamente reduciendo su índice a 60, y aumentando el índice de la activación a 40 aproximadamete, mostrando el aumento del nivel de estres.
+
+<img width="1600" height="768" alt="image" src="https://github.com/user-attachments/assets/60027c9c-6391-4905-b6de-0cd4e5b679a8" />
+
+- Finalmente se tiene el siguiente gráfico correspondiente a el estímulo de estrés donde se evidencia que el nivel de conductancia aumenta, siendo uno de los componentes relevantes para establecer los indices de relajación y activación.
+
+<img width="1600" height="745" alt="image" src="https://github.com/user-attachments/assets/12b0fa0a-3387-4c7d-9f15-077f6c7dd669" />
 
 ## Bibliografía
 [1] R. Singh, A. Gehlot, R. Saxena, K. Alsubhi, D. Anand, I. D. Noya, S. V. Akram, and S. Choudhury, “Stress Detector Supported Galvanic Skin Response System with IoT and LabVIEW GUI,” Computers, Materials & Continua, vol. 74, no. 1, 2023, doi: 10.32604/cmc.2023.023894.
