@@ -363,6 +363,10 @@ Respecto al dispositivo vestible, se identifican posibles optimizaciones mediant
 
 Los resultados obtenidos se reflejan en las gráficas generadas, donde se evidencian claramente estados de relajación y de estrés, lo que confirma la validez del sistema para diferenciar condiciones autonómicas.
 
+El sistema desarrollado nos permitio confirmar los fundamentos teóricos expuestos sobre la actividad electrodérmica. Las pruebas que se realizaron evidenciaron la capacidad del dispositivo para capturar la activación del sistema nervioso simpático. La transición de un estado de relajación basal (con un índice de relajación de ~95 y voltaje cercano a 0.03 V sobre la línea base) a un estado de activación o estrés debido al susto geneado (con un índice de activación de ~40 y picos de hasta 3 V) valida la sensibilidad del sensor para detectar cambios autonómicos súbitos mediados por la secreción de las glándulas ecrinas.
+
+La captura de datos de manera inalámbrica mediante el uso de ESP32-S3 garantizó una buena captura de datos,permitiendo además la movilidad necesaria para las tecnologías portátiles (wearables). Adicionalmente, la implementación de la alerta al superar el umbral de estrés (> 1.7 V) es de gran ayuda ya que permite la intervención de autorregulación inmediata frente a situaciones de sobrecarga cognitiva o emocional en la vida cotidiana.
+
 
 ## Bibliografía
 [1] R. Singh, A. Gehlot, R. Saxena, K. Alsubhi, D. Anand, I. D. Noya, S. V. Akram, and S. Choudhury, “Stress Detector Supported Galvanic Skin Response System with IoT and LabVIEW GUI,” Computers, Materials & Continua, vol. 74, no. 1, 2023, doi: 10.32604/cmc.2023.023894.
