@@ -18,6 +18,10 @@ La parametrización cuantitativa de estos estados fisiológicos proporciona una 
 ##
 <img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/32741961-999a-458e-b983-6cefb6c740ae" />  <img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/363abe7b-a6f7-40a6-86a5-c2e09f93d3c0" />  <img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/58fff02b-dc04-4f51-92bd-11546a246ee8" />
 
+
+## Parte B
+
+
 ## Bibliografía
 [1] R. Singh, A. Gehlot, R. Saxena, K. Alsubhi, D. Anand, I. D. Noya, S. V. Akram, and S. Choudhury, “Stress Detector Supported Galvanic Skin Response System with IoT and LabVIEW GUI,” Computers, Materials & Continua, vol. 74, no. 1, 2023, doi: 10.32604/cmc.2023.023894.
 
