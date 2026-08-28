@@ -20,10 +20,14 @@ La parametrización cuantitativa de estos estados fisiológicos proporciona una 
 
 
 ## Parte B
+Para la captura de la señal galvánica se implementó el siguiente código, en el cual se evidencia lo siguiente:
+
 
 
 
 ## Parte C
+
+
 
 ## Bibliografía
 [1] R. Singh, A. Gehlot, R. Saxena, K. Alsubhi, D. Anand, I. D. Noya, S. V. Akram, and S. Choudhury, “Stress Detector Supported Galvanic Skin Response System with IoT and LabVIEW GUI,” Computers, Materials & Continua, vol. 74, no. 1, 2023, doi: 10.32604/cmc.2023.023894.
