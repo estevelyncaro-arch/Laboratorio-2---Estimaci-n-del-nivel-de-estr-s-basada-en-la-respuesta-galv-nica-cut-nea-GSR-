@@ -22,8 +22,25 @@ La parametrización cuantitativa de estos estados fisiológicos proporciona una 
 ## Parte B
 Para la captura de la señal galvánica se implementó el siguiente código, en el cual se evidencia lo siguiente:
 
-
-
+```matlab
+clear, clc, close all
+if exist('b', 'var'), clear b; end
+nombreDispositivo  = "ESP32_S3_GSR";
+serviceUUID        = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E";
+characteristicUUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E";
+fs = 25; duracion = 60; alpha = 0.02; condicion = "Relajacion";
+N = fs * duracion;
+tiempo_baseline = 10;
+N_baseline = tiempo_baseline * fs;
+ref_scl = 0.10; ref_scr = 0.05; ref_eventos = 10; ref_pendiente = 0.002;
+try
+    b = ble(nombreDispositivo);
+catch ME
+    error('No se pudo establecer conexión BLE.');
+end
+c = characteristic(b, serviceUUID, characteristicUUID);
+``` 
+En esta Primera parte del codigo se  definen las credenciales necesarias para la conexión BLE, incluyendo los identificadores únicos de servicio y característica asociados al perfil Nordic UART. Con ello se habilita el canal de transmisión de datos entre MATLAB y la ESP32; En cuanto a la adquisición de la señal, se establece una frecuencia de muestreo de 25 Hz y una duración de 60 segundos, lo que corresponde a un total de 1500 muestras. Se incorpora un factor de suavizado para separar el componente tónico y se define la condición experimental, como relajación, estado normal o estres.
 
 ## Parte C
 
