@@ -350,6 +350,15 @@ Finalmente obtenemos tres gráficos importantes que se explican a continuación.
 
 <img width="1600" height="745" alt="image" src="https://github.com/user-attachments/assets/12b0fa0a-3387-4c7d-9f15-077f6c7dd669" />
 
+## CONCLUSIONES 
+
+En conclusión, se logró desarrollar un código funcional que cumple con los objetivos planteados, a pesar de no contar aún con la capacidad de graficar en tiempo real. Este aspecto representa una oportunidad de mejora, ya que la incorporación de visualización continua permitiría un registro más dinámico y detallado de la señal.
+
+Respecto al dispositivo vestible, se identifican posibles optimizaciones mediante pequeños ajustes en su estructura, lo que podría incrementar su comodidad y eficiencia. En cuanto al código, además de la transmisión inalámbrica que funciona de manera adecuada y estable, se sugiere implementar mejoras orientadas a la adquisición en tiempo real y al registro continuo de datos.
+
+Los resultados obtenidos se reflejan en las gráficas generadas, donde se evidencian claramente estados de relajación y de estrés, lo que confirma la validez del sistema para diferenciar condiciones autonómicas.
+
+
 ## Bibliografía
 [1] R. Singh, A. Gehlot, R. Saxena, K. Alsubhi, D. Anand, I. D. Noya, S. V. Akram, and S. Choudhury, “Stress Detector Supported Galvanic Skin Response System with IoT and LabVIEW GUI,” Computers, Materials & Continua, vol. 74, no. 1, 2023, doi: 10.32604/cmc.2023.023894.
 
