@@ -16,11 +16,13 @@ Para la aplicación práctica de estos conceptos los sistemas de adquisición de
 La parametrización cuantitativa de estos estados fisiológicos proporciona una base sólida para que las tecnologías portátiles, integradas con sistemas de Internet y conectividad inalámbrica, envíen alertas en tiempo real y permitan una intervención de autorregulación inmediata frente a situaciones de sobrecarga cognitiva o emocional en la vida cotidiana.
 
 ##
-<img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/32741961-999a-458e-b983-6cefb6c740ae" />
-
-<img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/363abe7b-a6f7-40a6-86a5-c2e09f93d3c0" />
-
-<img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/58fff02b-dc04-4f51-92bd-11546a246ee8" />
+<img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/32741961-999a-458e-b983-6cefb6c740ae" />  <img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/363abe7b-a6f7-40a6-86a5-c2e09f93d3c0" />  <img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/58fff02b-dc04-4f51-92bd-11546a246ee8" />
 
 ## Bibliografía
-[1] 
+[1] R. Singh, A. Gehlot, R. Saxena, K. Alsubhi, D. Anand, I. D. Noya, S. V. Akram, and S. Choudhury, “Stress Detector Supported Galvanic Skin Response System with IoT and LabVIEW GUI,” Computers, Materials & Continua, vol. 74, no. 1, 2023, doi: 10.32604/cmc.2023.023894.
+
+[2] R. Markiewicz, A. Markiewicz-Gospodarek, and B. Dobrowolska, “Galvanic Skin Response Features in Psychiatry and Mental Disorders: A Narrative Review,” International Journal of Environmental Research and Public Health, vol. 19, no. 20, Art. no. 13428, 2022, doi: 10.3390/ijerph192013428.
+
+[3] D. S. Bari, M. N. S. Rammoo, H. Y. Y. Aldosky, M. K. Jaqsi, and Ø. G. Martinsen, “The Five Basic Human Senses Evoke Electrodermal Activity,” Sensors, vol. 23, no. 19, p. 8181, Sep. 2023, doi: 10.3390/s23198181.
+
+[4] M. Viqueira Villarejo, B. García Zapirain, and A. Méndez Zorrilla, “A Stress Sensor Based on Galvanic Skin Response (GSR) Controlled by ZigBee,” Sensors, vol. 12, pp. 6075–6101, May 2012, doi: 10.3390/s120506075.
