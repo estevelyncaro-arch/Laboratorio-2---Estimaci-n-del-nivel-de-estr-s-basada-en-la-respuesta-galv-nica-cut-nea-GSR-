@@ -118,7 +118,7 @@ fprintf('Estado Diagnosticado:   %s\n', nivel_estres)
 fprintf('=====================================\n\n')
 
 if nivel_estres == "ESTRESADO"
-    disp(" ⚠️ ALERTA: LA PERSONA ESTÁ ESTRESADA (> 1.7 V) ⚠️")
+    disp("  ALERTA: LA PERSONA ESTÁ ESTRESADA (> 1.7 V) ")
     
     % Generar tono de alarma (Frecuencia: 1000 Hz por 1.5 segundos)
     fs_audio = 8000;
