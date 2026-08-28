@@ -39,8 +39,39 @@ catch ME
     error('No se pudo establecer conexión BLE.');
 end
 c = characteristic(b, serviceUUID, characteristicUUID);
-``` 
+```
+
 En esta Primera parte del codigo se  definen las credenciales necesarias para la conexión BLE, incluyendo los identificadores únicos de servicio y característica asociados al perfil Nordic UART. Con ello se habilita el canal de transmisión de datos entre MATLAB y la ESP32; En cuanto a la adquisición de la señal, se establece una frecuencia de muestreo de 25 Hz y una duración de 60 segundos, lo que corresponde a un total de 1500 muestras. Se incorpora un factor de suavizado para separar el componente tónico y se define la condición experimental, como relajación, estado normal o estres.
+
+```matlab
+while k <= N && toc < duracion
+    dataRaw = read(c);
+    ...
+    scl_actual = alpha * volt + (1-alpha) * scl_actual;
+    scr(k) = gsr(k) - scl(k);
+    ...
+end
+dt = diff(t);
+fs_real = 1 / mean(dt);
+gsr_baseline = mean(gsr(1:N_baseline));
+gsr_norm = gsr - gsr_baseline;
+if gsr_promedio < 1.4
+    nivel_estres = "RELAJADO";
+elseif gsr_promedio >= 1.4 && gsr_promedio <= 1.7
+    nivel_estres = "NORMAL";
+else
+    nivel_estres = "ESTRESADO";
+end
+scr_suave = movmean(scr, 5);
+umbral_scr = 0.02; distancia_minima = round(fs_real); 
+for k = 2:length(scr_suave)
+    if scr_suave(k) >= umbral_scr && scr_suave(k-1) < umbral_scr ...
+```
+
+En la siguiente parte del código se aborda principalmente el procesamiento de la señal galvánica una vez recibida desde el microcontrolador. En primer lugar, se ejecuta un bucle controlado por el reloj interno que acumula las muestras capturadas. Los datos, transmitidos en forma de bytes, se convierten primero a texto y posteriormente a valores numéricos para su análisis.
+Se aplica un filtro adaptativo exponencial que separa el componente tónico (SCL), correspondiente a la parte lenta y basal de la señal. A partir de ello se obtiene también el componente fásico (SCR), que refleja las variaciones rápidas asociadas a respuestas simpáticas. El algoritmo ajusta el número real de muestras recibidas y calcula la frecuencia efectiva de adquisición, compensando posibles variaciones de latencia en la transmisión inalámbrica.
+Posteriormente, las señales se normalizan restando el voltaje medio inicial, de modo que las variaciones comiencen desde un nivel de referencia centrado en cero. Con esta base, se segmenta el estado autonómico en tres categorías: relajado, normal o estresado, según el nivel medio de conductancia. Además, se aplica un filtro de media móvil para reducir el ruido y se implementa un detector de eventos fisiológicos. Este detector identifica incrementos rápidos en la señal (flancos ascendentes) que superan un umbral definido y utiliza un período refractario de aproximadamente un segundo para evitar contabilizar varias veces el mismo evento.
+
 
 ## Parte C
 
