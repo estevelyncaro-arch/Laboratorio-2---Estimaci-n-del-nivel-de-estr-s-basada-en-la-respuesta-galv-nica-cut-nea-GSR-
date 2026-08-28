@@ -1,5 +1,10 @@
 # Estimación del nivel de estrés basada en la respuesta galvánica cutánea (GSR)
 
+- Evelyn Marcela Caro Rodríguez - 5600848 - est.evelyn.caro@unimilitar.edu.co
+
+- María Angel Benavides Silva - 5600852 - est.mariaa.benavides@unimilitar.edu.co
+
+
 ## Parte A 
 
 La actividad electrodérmica tambien conocida como respuesta galvánica de la piel (GSR), abarca todas las propiedades eléctricas activas y pasivas observadas en la piel. Desde el punto de vista fisiológico, el GSR actúa como un marcador directo de la actividad del sistema nervioso autónomo simpático; la variación en la conductividad eléctrica cutánea está regulada por las glándulas sudoríparas ecrinas, localizadas en las regiones palmar y plantar principalmente, las cuales son controladas por los nervios sudomotores del sistema simpático a través de neurotransmisores como la acetilcolina y la noradrenalina. Cuando el sistema simpático se activa por estímulos térmicos o psicológicos, la secreción de sudor (rico en agua y electrolitos) llena los conductos sudoríparos y humecta el estrato córneo altamente resistivo, creando vías de transporte iónico que reducen la resistencia cutánea y elevan de manera transitoria la conductancia.
