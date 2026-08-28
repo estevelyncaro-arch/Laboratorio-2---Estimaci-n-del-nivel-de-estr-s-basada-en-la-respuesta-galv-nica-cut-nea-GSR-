@@ -8,6 +8,13 @@ La generación de señales electrodérmicas está compuesta por estructuras cere
 
 Los cinco sentidos (vista, oído, tacto, gusto y olfato) también actúan como un desencadenante directo de la actividad electrodérmica, evidenciando el acoplamiento entre el procesamiento de la información sensorial y la carga cognitiva que activa el sistema simpático. Investigaciones experimentales simultáneas de parámetros fásicos (como la conductancia SCR, la susceptancia SSR y el potencial SPR) revelan que el organismo reacciona con diferente intensidad según el tipo de receptor activado, se ha demostrado que los estímulos químicos (gusto y olfato), producen mayores amplitudes fásicas que los estímulos físicos (vista, oído y tacto). El sentido del olfato genera respuestas electrodérmicas caracterizadas por amplitudes significativamente mayores en todos los parámetros y mayores tiempos de subida de la conductancia. Lo que se debe a la extrema sensibilidad del sistema olfatorio y a la transmisión directa e inmediata de impulsos desde las neuronas receptoras olfativas hacia las estructuras cerebrales.
 
+Para la aplicación práctica de estos conceptos los sistemas de adquisición de datos biomédicos traducen la resistencia de la piel a variaciones de voltaje analógico empleando un circuito de divisor de tensión. Bajo el principio de la ley de Ohm, la tensión de salida de este circuito es inversamente proporcional a la resistencia de la piel: a medida que el paciente experimenta estrés o activación simpática, la sudoración aumenta, la resistencia cutánea disminuye y el voltaje de salida se eleva. Mediante análisis matemáticos de histogramas aplicados sobre estas señales digitalizadas, se han establecido los siguientes umbrales de clasificación fisiológica de voltaje para determinar de manera objetiva el nivel de tensión del usuario:
+- Estado de Relajación: Se identifica cuando el voltaje medido por el dispositivo GSR es menor a 1.75 V
+- Estado Normal: Se establece cuando las lecturas se sitúan en un rango intermedio entre 1.44 V y 1.75
+- Estado de Estrés: Se determina cuando la tensión registrada supera el límite de 1.44 V, producto de la caída drástica de la resistencia de la piel debido al incremento en la actividad de las glándulas sudoríparas
+
+La parametrización cuantitativa de estos estados fisiológicos proporciona una base sólida para que las tecnologías portátiles, integradas con sistemas de Internet y conectividad inalámbrica, envíen alertas en tiempo real y permitan una intervención de autorregulación inmediata frente a situaciones de sobrecarga cognitiva o emocional en la vida cotidiana.
+
 ##
 <img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/32741961-999a-458e-b983-6cefb6c740ae" />
 
